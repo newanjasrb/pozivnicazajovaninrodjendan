@@ -176,4 +176,10 @@ const isInApp = /Instagram|FBAN|FBAV/i.test(navigator.userAgent);
       });
     });
   }
+  const profileImg = document.getElementById('profile-img');
+if (profileImg) {
+  profileImg.addEventListener('click', () => {
+    window.open('https://www.instagram.com/jovana_joca_vujovic', '_blank');
+  });
+}
 });
