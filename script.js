@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response.ok) {
           rsvpForm.innerHTML = `
             <div style="padding: 20px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; text-align: center;">
-              <h3 style="color: #166534; margin-bottom: 6px; font-size: 1.1rem;">Hvala na odgovoru! 🙌</h3>
+              <h3 style="color: #166534; margin-bottom: 6px;text-align: center; font-size: 1.1rem;">Hvala na odgovoru! 🙌</h3>
               <p style="color: #15803d; font-size: 0.85rem;">Tvoj odgovor je uspešno zabeležen.</p>
             </div>
           `;
