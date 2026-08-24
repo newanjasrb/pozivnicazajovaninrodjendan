@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  const rsvpForm = document.querySelector('.rsvp-form');
+ const rsvpForm = document.querySelector('.rsvp-form');
 
   if (rsvpForm) {
     rsvpForm.addEventListener('submit', async (e) => {
@@ -44,8 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const originalBtnText = submitBtn.innerHTML;
 
       const nameInput = rsvpForm.querySelector('input[name="Ime i Prezime"]');
-      const attendanceSelect = rsvpForm.querySelector('select[name="Dolazak"]');
       const noteInput = rsvpForm.querySelector('input[name="Napomena"]');
+
+      const attendanceRadio = rsvpForm.querySelector('input[name="Dolazak"]:checked');
+
+      if (!attendanceRadio) {
+        alert("Molimo izaberite da li dolazite klikom na jednu od kartica.");
+        return;
+      }
 
       submitBtn.disabled = true;
       submitBtn.style.opacity = '0.7';
@@ -55,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data: [
           {
             'Ime': nameInput.value.trim(),
-            'Dolazak': attendanceSelect.value,
+            'Dolazak': attendanceRadio.value, 
             'Napomena': noteInput.value.trim() || 'Nema napomene',
             'DatumPrijave': new Date().toLocaleString('sr-RS')
           }
@@ -89,7 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerHTML = originalBtnText;
       }
     });
-  }
+  } 
+
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', () => {
       const activeElement = document.activeElement;
