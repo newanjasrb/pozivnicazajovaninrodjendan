@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jovanin 32. rođendan</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body> 
+  <main class="card animate-fade-in">
+    <div class="avatar-wrapper">
+      <div class="avatar-glow"></div>
+      <img src="slika.jpg" alt="Jovana" class="avatar-img">
+    </div>
+    <span class="badge">Pozivam te na svoj</span>
+    <h1>32. rođendan! 🥳✨</h1>
+    <p class="subtitle">Jedini način da lakše podnesem ovu cifru je da se okupimo i dobro provedemo!</p>
+    <div class="countdown-container" id="countdown" data-date="2026-09-08T17:00:00">
+      <div class="time-box">
+        <span id="days">00</span>
+        <label>Dana</label>
+      </div>
+      <div class="time-box">
+        <span id="hours">00</span>
+        <label>Sati</label>
+      </div>
+      <div class="time-box">
+        <span id="minutes">00</span>
+        <label>Minuta</label>
+      </div>
+      <div class="time-box">
+        <span id="seconds">00</span>
+        <label>Sekundi</label>
+      </div>
+    </div>
+
+    <div class="details-grid">
+      
+      <div class="detail-card">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        </div>
+        <div class="detail-info">
+          <span>DATUM</span>
+          <strong>Utorak<br>8.9.2026. godine</strong>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <div class="detail-info">
+          <span>VREME</span>
+          <strong>17:00h – 00:00h</strong>
+        </div>
+      </div>
+
+      <div class="detail-card full-width">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        </div>
+        <div class="detail-info">
+          <span>LOKACIJA</span>
+          <strong>Malena Lux, Ježevica</strong>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="map-wrapper">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2874.8!2d20.395!3d43.818!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47577d002e6a0acb%3A0x81dc6af2e5718f93!2sMalenaLux!5e0!3m2!1ssr!2srs!4v1700000000000!5m2!1ssr!2srs" 
+        width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+
+    
+    <form action="https://formspree.io/f/TVOJ_FORMSPREE_ID" method="POST" class="rsvp-form">
+      <h3>Potvrdi svoj dolazak najkasnije do 1. Septembra</h3>
+      
+      <div class="input-group">
+        <input type="text" name="Ime i Prezime" placeholder="Tvoje ime i prezime" required>
+      </div>
+      
+      <div class="input-group">
+        <select name="Dolazak" required>
+          <option value="" disabled selected>Da li dolaziš?</option>
+          <option value="Dolazim">Potvrđujem dolazak</option>
+          <option value="Ne dolazim">Ne dolazim</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <input type="text" name="Napomena" placeholder="Napomena (opciono)">
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <span>Pošalji odgovor</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </button>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
