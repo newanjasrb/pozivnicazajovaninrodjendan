@@ -90,6 +90,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => {
+      const activeElement = document.activeElement;
+      if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'SELECT')) {
+        setTimeout(() => {
+          activeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      }
+    });
+  }
 document.querySelectorAll('input, select, textarea').forEach(element => {
   element.addEventListener('focus', function() {
     setTimeout(() => {
