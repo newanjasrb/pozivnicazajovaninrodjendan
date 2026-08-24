@@ -79,22 +79,34 @@
     
     <form action="https://formspree.io/f/TVOJ_FORMSPREE_ID" method="POST" class="rsvp-form">
       <h3>Potvrdi svoj dolazak najkasnije do 1. Septembra</h3>
-      
-      <div class="input-group">
-        <input type="text" name="Ime i Prezime" placeholder="Tvoje ime i prezime" required>
-      </div>
-      
-      <div class="input-group">
-        <select name="Dolazak" required>
-          <option value="" disabled selected>Da li dolaziš?</option>
-          <option value="Dolazim">Potvrđujem dolazak</option>
-          <option value="Ne dolazim">Ne dolazim</option>
-        </select>
-      </div>
+     <div class="input-group">
+  <input type="text" name="Ime i Prezime" placeholder="Tvoje ime i prezime" required>
+</div>
 
-      <div class="input-group">
-        <input type="text" name="Napomena" placeholder="Napomena/Broj osoba (opciono)">
-      </div>
+<!-- Moderni custom selector dolaska -->
+<div class="input-group">
+  <div class="custom-select-cards">
+    <label class="select-card">
+      <input type="radio" name="Dolazak" value="Dolazim" required>
+      <span class="card-content">
+        <span class="icon">🎉</span>
+        <span class="text">Potvrđujem dolazak</span>
+      </span>
+    </label>
+
+    <label class="select-card">
+      <input type="radio" name="Dolazak" value="Ne dolazim" required>
+      <span class="card-content">
+        <span class="icon">😢</span>
+        <span class="text">Ne dolazim</span>
+      </span>
+    </label>
+  </div>
+</div>
+
+<div class="input-group">
+  <input type="text" name="Napomena" placeholder="Napomena/Broj osoba (opciono)">
+</div>
 
       <button type="submit" class="submit-btn">
         <span>Pošalji odgovor</span>
