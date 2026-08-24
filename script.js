@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-document.querySelectorAll('input, select, textarea').forEach(element => {
+document.querySelectorAll('input, textarea').forEach(element => {
   element.addEventListener('focus', function() {
     setTimeout(() => {
       this.scrollIntoView({ behavior: 'smooth', block: 'center' });
