@@ -18,12 +18,13 @@
 }
 
 body {
-  min-height: 100dvh;
+ min-height: 100dvh;
   background: var(--bg-gradient);
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 16px 10px;
+  align-items: flex-start; 
+  padding: 20px 10px 80px 10px; 
+  overflow-y: auto; 
 }
 
 .card {
@@ -37,6 +38,7 @@ body {
   width: 100%;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.6);
+  margin: auto 0;
 }
 
 .animate-fade-in {
