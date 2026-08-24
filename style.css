@@ -26,6 +26,8 @@ body {
   padding: 20px 10px 80px 10px; 
   overflow-y: auto; 
 }
+body:has(input:focus, textarea:focus)
+{padding-bottom:50vh !important;}
 
 .card {
   background: var(--glass-bg);
