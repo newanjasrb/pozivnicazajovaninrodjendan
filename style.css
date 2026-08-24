@@ -23,7 +23,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start; 
-  padding: 20px 10px 30px 10px; 
+  padding: 20px 10px 20px 10px; 
   overflow-y: auto; 
 }
 body:has(input:focus, textarea:focus)
