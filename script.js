@@ -140,7 +140,7 @@ const dateCard = document.getElementById('event-date');
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Dodaj',
-        cancelButtonText: 'Otkazati',
+        cancelButtonText: 'Otkaži',
         confirmButtonColor: '#e11d48'
       }).then((result) => {
         if (result.isConfirmed) {
