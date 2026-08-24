@@ -131,41 +131,56 @@ const rsvpForm = document.querySelector('.rsvp-form');
 
 
 const dateCard = document.getElementById('event-date');
-if (dateCard) {
-  dateCard.style.cursor = 'pointer';
-  dateCard.addEventListener('click', () => {
-    const title = encodeURIComponent("Jovanin 32. rođendan 🎉");
-    const details = encodeURIComponent("Jovanin 32. rođendan - Malena Lux, Ježevica");
-    const location = encodeURIComponent("Malena Lux, Ježevica");
-    const startDate = "20260908T170000";
-    const endDate = "20260909T000000";
-    
-    const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
-    
-    if (confirm("Da li želiš da dodaš podsetnik za rođendan u svoj Google Kalendar?")) {
-      window.open(calendarUrl, '_blank');
-    }
-  });
-}
+  if (dateCard) {
+    dateCard.style.cursor = 'pointer';
+    dateCard.addEventListener('click', () => {
+      Swal.fire({
+        title: 'Google Kalendar',
+        text: 'Da li želiš da dodaš podsetnik za rođendan u svoj kalendar?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Dodaj',
+        cancelButtonText: 'Otkazati',
+        confirmButtonColor: '#e11d48'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const title = encodeURIComponent("Jovanin 32. rođendan 🎉");
+          const details = encodeURIComponent("Jovanin 32. rođendan - Malena Lux, Ježevica");
+          const location = encodeURIComponent("Malena Lux, Ježevica");
+          const startDate = "20260908T170000";
+          const endDate = "20260909T000000";
+          const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
+          window.open(calendarUrl, '_blank');
+        }
+      });
+    });
+  }
 
-
-const timeCard = document.getElementById('event-time');
-if (timeCard) {
-  timeCard.style.cursor = 'pointer';
-  timeCard.addEventListener('click', () => {
-    alert("ℹ️ Žurka traje 7 sati (od 17:00h do 00:00h).");
-  });
-}
-
-
-const locationCard = document.getElementById('event-location');
-if (locationCard) {
-  locationCard.style.cursor = 'pointer';
-  locationCard.addEventListener('click', () => {
-    window.open("https://www.google.com/maps/search/?api=1&query=Malena+Lux+Ježevica", '_blank');
-  });
-}
   
+  const timeCard = document.getElementById('event-time');
+  if (timeCard) {
+    timeCard.style.cursor = 'pointer';
+    timeCard.addEventListener('click', () => {
+      Swal.fire({
+        title: 'Trajanje događaja',
+        text: 'Rođendan traje 7 sati (od 17:00h do 00:00h).',
+        icon: 'info',
+        confirmButtonColor: '#e11d48'
+      });
+    });
+  }
+
+ 
+  const locationCard = document.getElementById('event-location');
+  if (locationCard) {
+    locationCard.style.cursor = 'pointer';
+    locationCard.addEventListener('click', () => {
+      window.open("https://www.google.com/maps/search/?api=1&query=Malena+Lux+Ježevica", '_blank');
+    });
+  }
+
+
+
 const isInApp = /Instagram|FBAN|FBAV/i.test(navigator.userAgent);
   if (isInApp) {
     document.querySelectorAll('input, textarea').forEach(element => {
