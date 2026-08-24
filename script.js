@@ -166,11 +166,14 @@ if (locationCard) {
   });
 }
   
-document.querySelectorAll('input, textarea').forEach(element => {
-  element.addEventListener('focus', function() {
-    setTimeout(() => {
-      this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 300);
-  });
-});
+const isInApp = /Instagram|FBAN|FBAV/i.test(navigator.userAgent);
+  if (isInApp) {
+    document.querySelectorAll('input, textarea').forEach(element => {
+      element.addEventListener('focus', function() {
+        setTimeout(() => {
+          this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 150);
+      });
+    });
+  }
 });
