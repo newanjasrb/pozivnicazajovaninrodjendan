@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
- const rsvpForm = document.querySelector('.rsvp-form');
+const rsvpForm = document.querySelector('.rsvp-form');
+  const SHEETDB_URL = 'https://sheetdb.io/api/v1/4tfd0azb14lsk';
 
   if (rsvpForm) {
     rsvpForm.addEventListener('submit', async (e) => {
@@ -45,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const nameInput = rsvpForm.querySelector('input[name="Ime i Prezime"]');
       const noteInput = rsvpForm.querySelector('input[name="Napomena"]');
-
       const attendanceRadio = rsvpForm.querySelector('input[name="Dolazak"]:checked');
 
       if (!attendanceRadio) {
@@ -53,23 +53,53 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      const enteredName = nameInput.value.trim().toLowerCase();
+      if (!enteredName) return;
+
       submitBtn.disabled = true;
       submitBtn.style.opacity = '0.7';
-      submitBtn.innerHTML = '<span>Šaljem...</span>';
-
-      const payload = {
-        data: [
-          {
-            'Ime': nameInput.value.trim(),
-            'Dolazak': attendanceRadio.value, 
-            'Napomena': noteInput.value.trim() || 'Nema napomene',
-            'DatumPrijave': new Date().toLocaleString('sr-RS')
-          }
-        ]
-      };
+      submitBtn.innerHTML = '<span>Proveravam...</span>';
 
       try {
-        const response = await fetch('https://sheetdb.io/api/v1/4tfd0azb14lsk', {
+        const checkResponse = await fetch(SHEETDB_URL);
+        if (!checkResponse.ok) throw new Error('Greška pri proveri baze.');
+        
+        const existingData = await checkResponse.json();
+        
+        const isAlreadyExists = existingData.some(row => {
+          const rowName = (row['Ime'] || '').trim().toLowerCase();
+          return rowName === enteredName;
+        });
+
+        if (isAlreadyExists) {
+          alert('⚠️ Već je poslata prijava sa ovim imenom i prezimenom!');
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+          submitBtn.innerHTML = originalBtnText;
+          return;
+        }
+
+        submitBtn.innerHTML = '<span>Šaljem...</span>';
+
+        const payload = {
+          data: [
+            {
+              'Ime': nameInput.value.trim(),
+              'Dolazak': attendanceRadio.value,
+              'Napomena': noteInput.value.trim() || 'Nema napomene',
+              'Datum': new Date().toLocaleString('sr-RS', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+              })
+            }
+          ]
+        };
+
+        const postResponse = await fetch(SHEETDB_URL, {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -78,35 +108,27 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify(payload)
         });
 
-        if (response.ok) {
+        if (postResponse.ok) {
           rsvpForm.innerHTML = `
             <div style="padding: 20px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; text-align: center;">
-              <h3 style="color: #166534; margin-bottom: 6px;text-align: center; font-size: 1.1rem;">Hvala na odgovoru! 🙌</h3>
+              <h3 style="color: #166534; margin-bottom: 6px; text-align: center; font-size: 1.1rem;">Hvala na odgovoru! 🙌</h3>
               <p style="color: #15803d; font-size: 0.85rem;">Tvoj odgovor je uspešno zabeležen.</p>
             </div>
           `;
         } else {
           throw new Error('Greška prilikom slanja na server.');
         }
+
       } catch (error) {
-        alert('Došlo je do greške prilikom slanja. Molimo te pokušaj ponovo.');
+        console.error(error);
+        alert('Došlo je do greške. Pokušaj ponovo.');
         submitBtn.disabled = false;
         submitBtn.style.opacity = '1';
         submitBtn.innerHTML = originalBtnText;
       }
     });
-  } 
-
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', () => {
-      const activeElement = document.activeElement;
-      if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'SELECT')) {
-        setTimeout(() => {
-          activeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
-      }
-    });
   }
+  
 document.querySelectorAll('input, textarea').forEach(element => {
   element.addEventListener('focus', function() {
     setTimeout(() => {
